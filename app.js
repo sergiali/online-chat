@@ -21,13 +21,13 @@ server.listen(PORT, () => {
 const users = {};
 
 io.on("connection", (socket) => {
-    // console.log(`User connected. ${socket.id}`);
+    console.log(`User connected. ${socket.id}`);
 
 
     // Listening
 
     socket.on("login",(nickname) => {
-        console.log(`${data} connected!` );
+        console.log(`${nickname} connected!` );
         socket.emit("login",nickname);
         users[socket.id]=nickname;
         io.sockets.emit("online",users);
