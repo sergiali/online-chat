@@ -10,7 +10,6 @@ const io = new Server(server);
 // Static folder
 app.use(express.static("public"));
 
-
 const PORT = process.env.PORT || 3000;
 
 server.listen(PORT, () => {
@@ -28,7 +27,7 @@ io.on("connection", (socket) => {
     // Listening
 
     socket.on("login",(nickname) => {
-       // console.log(`${data} connected!` );
+        console.log(`${data} connected!` );
         socket.emit("login",nickname);
         users[socket.id]=nickname;
         io.sockets.emit("online",users);
