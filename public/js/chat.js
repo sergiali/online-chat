@@ -10,6 +10,9 @@ const messageInput = document.getElementById("messageInput"),
 
     const nickname = localStorage.getItem("nickname");
     const datea = new Date();
+    // const minute = datea.getUTCMinutes;
+    // const houre = datea.getUTCHours;
+    
 // Emit Events
 
 socket.emit("login",nickname);
@@ -20,7 +23,8 @@ chatForm.addEventListener("submit", (e) => {
         socket.emit("chat message", {
             message: messageInput.value,
             name: nickname,
-            date:datea,
+            date:datea.getUTCHours,
+            date1:datea.getUTCMinutes,
         });
         messageInput.value = "";
     }
@@ -60,7 +64,7 @@ socket.on("chat message", (data) => {
                                     font-italic font-weight-light
                                     m-2
                                 "
-                                style="font-size: 9pt">  ${data.date}  </span>
+                                style="font-size: 9pt">  ${data.date} : ${data.date1} </span>
                             <p
                                 class="alert alert-info mt-2"
                                 style="font-family: persian01" >
