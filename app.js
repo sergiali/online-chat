@@ -4,14 +4,16 @@ const path = require('path');
 const express = require("express");
 const { Server } = require("socket.io");
 const expressLayouts = require('express-ejs-layouts');
-const morgan = require('morgan');
 const dotEnv = require('dotenv');
+const morgan = require('morgan');
 
 const connectDB = require('./config/db');
 
 //* Load Config 
 dotEnv.config({path:"./config/config.env"});
 
+//* Database Connection
+connectDB();
 
 const app = express(); //? Request Handler Valid createServer()
 const server = http.createServer(app);
@@ -22,17 +24,8 @@ if(process.env.NODE_ENV === "development"){
     app.use(morgan("dev"));
 };
 
-// Static folder
-app.use(express.static(path.join(__dirname,"./public")));
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT,() => console.log(`server is running in ${process.env.NODE_ENV} mode on port ${PORT}`));
-// server.listen(PORT, () => {
-//     console.log(`Server is running on port ${PORT}`);
-// });
-
 //? View Engine (EJS)
-app.set(expressLayouts);
+app.use(expressLayouts);
 app.set("view engine","ejs");
 app.set("layout","./layouts/mainLayout");
 app.set("views","views");
@@ -40,12 +33,23 @@ app.set("views","views");
 //! BodyParser
 app.use(express.urlencoded({extended: false}));
 
-
-//* Database Connection
-connectDB();
+// Static folder
+app.use(express.static(path.join(__dirname,"./public")));
 
 //* Routes
 app.use("/users",require('./routes/users'));
+
+
+const PORT = process.env.PORT || 3000;
+server.listen(PORT,() => console.log(`server is running in ${process.env.NODE_ENV} mode on port ${PORT}`));
+// server.listen(PORT, () => {
+//     console.log(`Server is running on port ${PORT}`);
+// });
+
+
+
+
+
 
 // Setup websocket
 const users = {};
