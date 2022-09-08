@@ -4,8 +4,11 @@ const path = require('path');
 const express = require("express");
 const { Server } = require("socket.io");
 const expressLayouts = require('express-ejs-layouts');
+const passport = require('passport');
 const dotEnv = require('dotenv');
 const morgan = require('morgan');
+const flash = require('connect-flash');
+const session = require('express-session');
 
 const connectDB = require('./config/db');
 
@@ -14,6 +17,9 @@ dotEnv.config({path:"./config/config.env"});
 
 //* Database Connection
 connectDB();
+
+//* Passport Configuration
+require('./config/passport');
 
 const app = express(); //? Request Handler Valid createServer()
 const server = http.createServer(app);
@@ -32,6 +38,21 @@ app.set("views","views");
 
 //! BodyParser
 app.use(express.urlencoded({extended: false}));
+
+//* Session
+app.use(session({
+    secret: "secret",
+    cookie: {maxAge:60000},
+    resave: false,
+    saveUninitialized: false,
+}));
+
+//* Passport
+app.use(passport.initialize());
+app.use(passport.session());
+
+//? Flash
+app.use(flash());  //req.flash
 
 // Static folder
 app.use(express.static(path.join(__dirname,"./public")));
