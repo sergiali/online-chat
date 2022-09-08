@@ -1,22 +1,29 @@
-<main class="form-signin w-100 m-auto">
-    <form accept="/users/login" method="post">
-    <!-- <img class="mb-4" src="/docs/5.2/assets/brand/bootstrap-logo.svg" alt="" width="72" height="57"> -->
-    <h1 class="h3 mb-3 fw-normal"> ورود به بخش مدیریت </h1>
-
-    <div class="form-floating">
-        <label for="floatingInput"> آدرس ایمیل </label>
-        <input type="email" class="form-control mb-2" id="floatingInput" placeholder="name@example.com">
-    </div>
-    <div class="form-floating">
-        <label for="floatingPassword"> کلمه عبور </label>
-        <input type="password" class="form-control" id="floatingPassword" placeholder=" کلمه عبور ">
-    </div>
-
-    <div class="checkbox mb-3">
+<form class="form-signin" action="/users/login" method="POST">
+  <h1 class="h3 mb-3 font-weight-normal">ورود به بخش مدیریت</h1>
+  <%- include("./includes/loginMessages.ejs") %>
+  <label for="inputEmail" class="sr-only">آدرس ایمیل</label>
+  <input
+      type="email"
+      name="email"
+      id="inputEmail"
+      class="form-control mb-2"
+      placeholder="آدرس ایمیل"
+      required
+      autofocus
+  />
+  <label for="inputPassword" class="sr-only">کلمه عبور</label>
+  <input
+      type="password"
+      name="password"
+      id="inputPassword"
+      class="form-control"
+      placeholder="کلمه عبور"
+      required
+  />
+  <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me"> مرا بخاطر بسپار
+          <input type="checkbox" value="remember-me" /> من را به خاطر بسپار
       </label>
-    </div>
-    <button class="w-100 btn btn-lg btn-primary" type="submit"> ورود </button>
-  </form>
-</main>
+  </div>
+  <button class="btn btn-lg btn-primary btn-block" type="submit">ورود</button>
+</form>
