@@ -4,11 +4,11 @@ const bcrypt = require('bcryptjs');
 
 const User = require('../model/user');
 
-passport.use(new Strategy ({usernameField:"email"}, async (email,password,done) => {
+passport.use(new Strategy ({usernameField:"fullname"}, async (fullname,password,done) => {
     try {
-        const user = await User.findOne({email});
+        const user = await User.findOne({fullname});
         if(!user){
-            return done(null,false,{message:"کاربری با این ایمیل ثبت نشده است"});
+            return done(null,false,{message:"کاربری با این نام ثبت نشده است"});
         }
         const isMatch = await bcrypt.compare(password,user.password);
         if(isMatch){
