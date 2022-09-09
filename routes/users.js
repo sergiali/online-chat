@@ -11,7 +11,7 @@ router.get("/login",userController.login);
 
 // @Desc  Login Handle
 // @Desc  POST /users/login
-router.post("/login",userController.loginHandle);
+router.post("/login",userController.loginHandle,userController.rememberMe);
 
 // @Desc  Logout Handle
 // @Desc  GET /users/logoin
