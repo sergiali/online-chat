@@ -2,6 +2,7 @@ const http = require("http");
 const path = require('path');
 
 const express = require("express");
+const mongoose = require('mongoose');
 const { Server } = require("socket.io");
 const expressLayouts = require('express-ejs-layouts');
 const passport = require('passport');
@@ -9,6 +10,7 @@ const dotEnv = require('dotenv');
 const morgan = require('morgan');
 const flash = require('connect-flash');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 
 const connectDB = require('./config/db');
 
@@ -45,6 +47,7 @@ app.use(session({
     cookie: {maxAge:60000},
     resave: false,
     saveUninitialized: false,
+    store: MongoStore.create({mongoUrl: process.env.MONGO_URI})
 }));
 
 //* Passport
@@ -56,9 +59,11 @@ app.use(flash());  //req.flash
 
 // Static folder
 app.use(express.static(path.join(__dirname,"./public")));
+app.use(express.static(path.join(__dirname,"./views")));
 
 //* Routes
 app.use("/users",require('./routes/users'));
+app.use("/chatt",require('./routes/chatt'));
 
 
 const PORT = process.env.PORT || 3000;
