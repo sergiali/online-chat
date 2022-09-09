@@ -14,11 +14,20 @@ exports.login = (req,res) => {
 
 exports.loginHandle = (req,res,next) => {
     passport.authenticate("local",{
-        successRedirect:"/chat.html",
+        //successRedirect:"/chatt",
         failureRedirect:"/users/login",
         failureFlash: true,
     })(req,res,next);
 };
+
+exports.rememberMe = (req,res) => {
+    if(req.body.remember){
+        req.session.cookie.originalMaxAge= 24*60*60*1000;
+    } else {
+        req.session.cookie.expire = null;
+    };
+    res.redirect("/chatt");
+}
 
 exports.logout = (req,res,next) => {
     req.logout(function(err) {
