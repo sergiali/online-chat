@@ -2,6 +2,74 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+        <link rel="stylesheet" href="/css/styles.css" />
+        <link rel="stylesheet" href="/css/bootstrap-rtl.css" />
+        <link rel="stylesheet" href="/css/font-awesome.css" />
+        <% if(path === "/login" || path === "/register"){ %>
+        <link rel="stylesheet" href="/css/signin.css" />
+        <% } %>
+        <% if(path === "/404") {%>
+            <link rel="stylesheet" href="/css/404.css" />
+            <% } %>
+        <title><%= pageTitle %></title>
+    </head>
+    <body class="rtl">
+        <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+            <a class="navbar-brand" href="#">وبلاگ ما</a>
+            <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#navbarsExampleDefault"
+                aria-controls="navbarsExampleDefault"
+                aria-expanded="false"
+                aria-label="Toggle navigation"
+            >
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        
+            <div class="collapse navbar-collapse" id="navbarsExampleDefault">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">خانه</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">تمام پست ها</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">درباره</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">تماس با ما</a>
+                    </li>
+                </ul>
+                <form class="form-inline my-2 my-lg-0">
+                    <a href="/users/login" class="mr-2"> ورود </a>
+                    <button class="btn btn-secondary my-2 my-sm-0" type="submit">
+                        جستجو
+                    </button>
+                    <input
+                        class="form-control ml-sm-2"
+                        type="text"
+                        placeholder="جستجو"
+                        aria-label="Search"
+                    />
+                </form>
+            </div>
+        </nav>
+        
+        <script src="/js/jquery.slim.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+    </body>
+</html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
         <link rel="stylesheet" href="css/bootstrap-rtl.min.css" />
         <link rel="stylesheet" href="css/styles.css" />
         <title>ورود به چت</title>
@@ -24,7 +92,7 @@
             <button class="mt-3 btn-lg btn-primary btn-block" type="submit">
                 ورود به چت
             </button>
-        </form>
+        </form> 
         <script>
             const nicknameForm = document.getElementById("nicknameForm"),
                 nicknameInput = document.getElementById("nicknameInput");
@@ -38,4 +106,4 @@
             });
         </script>
     </body>
-</html>
+</html> -->
