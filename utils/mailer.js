@@ -14,16 +14,13 @@ const transporterDetails = smtpTransport({
     },
 });
 
-const transporter = nodemailer.createTransport(transporterDetails);
-
-const options = {
-    from: "",
-    to: "",
-    subject: "",
-    text: "",
+exports.sendEmail = (email,fullname,subject,message) => {
+    const transporter = nodemailer.createTransport(transporterDetails);
+    transporter.sendMail =({
+        from: "",
+        to: email,
+        subject: subject,
+        html: `<h1> سلام ${fullname}</h1>
+                <p> ${message} </p>`
+    });
 };
-
-transporter.sendMail(options,(err,info) => {
-    if(err) return console.log(err);
-    console.log(info);
-});
